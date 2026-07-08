@@ -138,9 +138,10 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4"
+            className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 leading-tight"
           >
-            {content.hero.title} <span className="text-lime-500">{content.hero.titleSpan}</span>
+            <span className="block">{content.hero.title}</span>
+            <span className="block text-lime-500">{content.hero.titleSpan}</span>
           </motion.h1>
 
           <motion.p 

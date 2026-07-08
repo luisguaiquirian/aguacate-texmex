@@ -16,6 +16,10 @@ export const metadata: Metadata = {
   title: "Aguacate Tex-Mex | Porto",
   description: "Autêntico sabor Tex-Mex no coração do Porto. Tacos, burritos, nachos e muito mais no Mercado Bom Sucesso. Pede online pelo Uber Eats ou Glovo.",
   keywords: ["tacos", "burritos", "tex-mex", "porto", "restaurante mexicano", "mercado bom sucesso"],
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   openGraph: {
     title: "Aguacate Tex-Mex | Porto",
     description: "Autêntico sabor Tex-Mex no coração do Porto. Tacos, burritos, nachos e muito mais.",

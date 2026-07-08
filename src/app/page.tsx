@@ -7,6 +7,7 @@ import { MapPin, Clock, Star, ArrowRight } from "lucide-react";
 import { SiGlovo, SiUbereats } from "react-icons/si";
 import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 import { menuData } from "@/data/menu";
+import CookieBanner from "@/components/CookieBanner";
 
 type Lang = "pt" | "en" | "fr";
 type MenuTab = "build" | "nachos" | "drinks" | "desserts";
@@ -535,21 +536,18 @@ export default function Home() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative aspect-video md:aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl group"
+            className="relative w-full aspect-video md:aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl"
           >
-            {/* Simulating a styled dark map */}
-            <div className="absolute inset-0 bg-neutral-950 flex items-center justify-center">
-              <Image src="/img/11.jpg" alt="Location Map" fill className="object-cover opacity-50 group-hover:scale-105 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent"></div>
-              
-              {/* Fake Map Pin */}
-              <div className="relative z-10 flex flex-col items-center animate-bounce">
-                <div className="bg-lime-500 text-black p-3 rounded-full shadow-[0_0_30px_rgba(132,204,22,0.8)]">
-                  <MapPin className="w-8 h-8" />
-                </div>
-                <div className="w-2 h-2 bg-lime-500 rounded-full mt-2 shadow-[0_0_10px_rgba(132,204,22,1)]"></div>
-              </div>
-            </div>
+            <iframe
+              src="https://maps.google.com/maps?q=Mercado+Bom+Sucesso+Porto+Portugal&output=embed&z=16&hl=pt"
+              width="100%"
+              height="100%"
+              style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) brightness(0.85) contrast(0.9)" }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Aguacate Tex-Mex - Mercado Bom Sucesso"
+            />
           </motion.div>
         </div>
       </section>
@@ -571,6 +569,8 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      {/* Cookie Banner */}
+      <CookieBanner lang={lang} />
     </div>
   );
 }

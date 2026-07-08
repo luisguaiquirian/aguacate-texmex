@@ -84,6 +84,22 @@ export const menuData = {
       stat2: { value: "3", label: "Idiomas Falados" },
       stat3: { value: "⭐ 4.1", label: "Google Rating" }
     },
+    promotions: {
+      title: "Ofertas Especiais",
+      subtitle: "Aproveita as nossas promoções exclusivas no Porto",
+      items: [
+        {
+          title: "Happy Hour Margaritas",
+          desc: "2x1 em todas as Margaritas (Clássica ou Spicy). De Terça a Quinta, das 18h às 20h.",
+          badge: "Popular"
+        },
+        {
+          title: "Menu de Almoço",
+          desc: "Prato Principal + Nachos + Bebida + Café por apenas 13,90€. De Segunda a Sexta, das 12h às 15h.",
+          badge: "Melhor Preço"
+        }
+      ]
+    },
     location: {
       title: "Encontra-nos",
       desc: "Estamos localizados no coração do Porto, oferecendo a melhor experiência Tex-Mex num ambiente vibrante e moderno.",
@@ -191,6 +207,22 @@ export const menuData = {
       stat2: { value: "3", label: "Languages Spoken" },
       stat3: { value: "⭐ 4.1", label: "Google Rating" }
     },
+    promotions: {
+      title: "Special Offers",
+      subtitle: "Enjoy our exclusive promotions in Porto",
+      items: [
+        {
+          title: "Margaritas Happy Hour",
+          desc: "2x1 on all Margaritas (Classic or Spicy). Tuesday to Thursday, from 6 PM to 8 PM.",
+          badge: "Popular"
+        },
+        {
+          title: "Lunch Menu",
+          desc: "Main Dish + Nachos + Drink + Coffee for only 13.90€. Monday to Friday, from 12 PM to 3 PM.",
+          badge: "Best Value"
+        }
+      ]
+    },
     location: {
       title: "Find Us",
       desc: "Located in the heart of Porto, we offer the best Tex-Mex experience in a vibrant and modern environment.",
@@ -297,6 +329,22 @@ export const menuData = {
       stat1: { value: "100%", label: "Ingrédients Frais" },
       stat2: { value: "3", label: "Langues Parlées" },
       stat3: { value: "⭐ 4.1", label: "Note Google" }
+    },
+    promotions: {
+      title: "Offres Spéciales",
+      subtitle: "Profitez de nos promotions exclusives à Porto",
+      items: [
+        {
+          title: "Happy Hour Margaritas",
+          desc: "2x1 sur toutes les Margaritas (Classique ou Spicy). Du Mardi au Jeudi, de 18h à 20h.",
+          badge: "Populaire"
+        },
+        {
+          title: "Menu Déjeuner",
+          desc: "Plat Principal + Nachos + Boisson + Café pour seulement 13,90€. Du Lundi au Vendredi, de 12h à 15h.",
+          badge: "Meilleur Prix"
+        }
+      ]
     },
     location: {
       title: "Trouvez-nous",

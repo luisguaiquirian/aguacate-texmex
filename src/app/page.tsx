@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -31,12 +31,59 @@ export default function Home() {
   const [lang, setLang] = useState<Lang>("pt");
   const [activeTab, setActiveTab] = useState<MenuTab>("build");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
   
   const content = menuData[lang];
 
   return (
     <div className="min-h-screen bg-neutral-950 text-white font-sans selection:bg-lime-500 selection:text-black overflow-x-hidden relative">
       
+      {/* Preloader */}
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="fixed inset-0 z-[100] bg-neutral-950 flex flex-col items-center justify-center gap-6"
+          >
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ repeat: Infinity, duration: 2.5, ease: "linear" }}
+              className="relative w-24 h-24"
+            >
+              <Image 
+                src="/logo.png" 
+                alt="Loading" 
+                fill 
+                className="rounded-full shadow-[0_0_50px_rgba(132,204,22,0.4)] object-cover" 
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-center"
+            >
+              <motion.h2 
+                animate={{ opacity: [0.4, 1, 0.4] }}
+                transition={{ repeat: Infinity, duration: 1.5 }}
+                className="text-lime-500 font-bold tracking-widest text-sm uppercase"
+              >
+                Aguacate Tex-Mex
+              </motion.h2>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Navigation */}
       <nav className="fixed w-full z-40 transition-all duration-300 bg-neutral-950/80 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -240,6 +287,49 @@ export default function Home() {
             </div>
           ))}
         </motion.div>
+      </section>
+
+      {/* Promotions Section */}
+      <section id="promotions" className="py-24 bg-neutral-900/50 border-t border-white/5 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-80 h-80 bg-lime-500/5 rounded-full blur-3xl -ml-20 -mt-20 pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeInUp}
+            className="text-center mb-16"
+          >
+            <p className="text-lime-500 font-bold tracking-widest text-sm uppercase mb-2">{content.promotions.title}</p>
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">{content.promotions.subtitle}</h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {content.promotions.items.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.2 }}
+                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                className="bg-neutral-950 p-8 rounded-3xl border border-white/10 hover:border-lime-500/50 shadow-xl transition-all relative group flex flex-col justify-between"
+              >
+                <div className="absolute top-6 right-6 bg-lime-500/10 border border-lime-500/20 text-lime-400 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider group-hover:bg-lime-500 group-hover:text-black transition-colors">
+                  {item.badge}
+                </div>
+                <div>
+                  <h3 className="text-2xl font-extrabold text-white mb-4 group-hover:text-lime-400 transition-colors">{item.title}</h3>
+                  <p className="text-neutral-400 text-base leading-relaxed mb-6">{item.desc}</p>
+                </div>
+                <a href="#menu" className="flex items-center gap-2 text-lime-500 font-bold text-sm group-hover:translate-x-2 transition-transform cursor-pointer w-fit">
+                  <span>{content.hero.cta}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Interactive Menu Section */}

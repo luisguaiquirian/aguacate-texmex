@@ -145,8 +145,8 @@ export default function AdminDashboard() {
   const updateMenuItem = (category: "nachos" | "drinks" | "desserts", listType: "items" | "starters" | "beers", index: number, key: "name" | "price", value: string) => {
     setData((prev) => {
       if (!prev) return prev;
-      const categoryData = prev[selectedLang][category];
-      const listToUpdate = [...(categoryData[listType] as any)];
+      const categoryData = prev[selectedLang][category] as any;
+      const listToUpdate = [...(categoryData[listType])];
       listToUpdate[index] = {
         ...listToUpdate[index],
         [key]: value
@@ -167,8 +167,8 @@ export default function AdminDashboard() {
   const addMenuItem = (category: "nachos" | "drinks" | "desserts", listType: "items" | "starters" | "beers") => {
     setData((prev) => {
       if (!prev) return prev;
-      const categoryData = prev[selectedLang][category];
-      const listToUpdate = [...(categoryData[listType] as any), { name: "Nuevo Ítem", price: "0.00€" }];
+      const categoryData = prev[selectedLang][category] as any;
+      const listToUpdate = [...(categoryData[listType]), { name: "Nuevo Ítem", price: "0.00€" }];
       return {
         ...prev,
         [selectedLang]: {
@@ -185,8 +185,8 @@ export default function AdminDashboard() {
   const deleteMenuItem = (category: "nachos" | "drinks" | "desserts", listType: "items" | "starters" | "beers", index: number) => {
     setData((prev) => {
       if (!prev) return prev;
-      const categoryData = prev[selectedLang][category];
-      const listToUpdate = (categoryData[listType] as any).filter((_: any, i: number) => i !== index);
+      const categoryData = prev[selectedLang][category] as any;
+      const listToUpdate = (categoryData[listType]).filter((_: any, i: number) => i !== index);
       return {
         ...prev,
         [selectedLang]: {

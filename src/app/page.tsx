@@ -32,15 +32,25 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<MenuTab>("build");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeData, setActiveData] = useState<typeof menuData>(menuData);
 
   useEffect(() => {
+    const localData = localStorage.getItem("custom-menu-data");
+    if (localData) {
+      try {
+        setActiveData(JSON.parse(localData));
+      } catch (e) {
+        console.error("Failed to parse custom-menu-data", e);
+      }
+    }
+
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
   
-  const content = menuData[lang];
+  const content = activeData[lang];
 
   return (
     <div className="min-h-screen bg-neutral-950 text-white font-sans selection:bg-lime-500 selection:text-black overflow-x-hidden relative">

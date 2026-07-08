@@ -1,8 +1,29 @@
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email === "admin@aguacate.com" && password === "admin123") {
+      localStorage.setItem("admin-token", "true");
+      router.push("/admin");
+    } else {
+      setError("Correo o contraseña incorrectos");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-neutral-950 flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans selection:bg-lime-500 selection:text-black text-white">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center flex flex-col items-center">
+        <Image src="/logo.png" alt="Aguacate Logo" width={80} height={80} className="rounded-full mb-4 shadow-[0_0_20px_rgba(132,204,22,0.3)]" />
+        <h2 className="text-center text-3xl font-extrabold text-white">
           Administración
         </h2>
         <p className="mt-2 text-center text-sm text-neutral-400">
@@ -11,8 +32,16 @@ export default function Login() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-neutral-900 py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-white/5">
-          <form className="space-y-6" action="#" method="POST">
+        <div className="bg-neutral-900 py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-white/5 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-lime-500/5 rounded-full blur-2xl pointer-events-none"></div>
+          
+          <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
+            {error && (
+              <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm px-4 py-2 rounded-md">
+                {error}
+              </div>
+            )}
+            
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-neutral-300">
                 Correo electrónico
@@ -24,6 +53,8 @@ export default function Login() {
                   type="email"
                   autoComplete="email"
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-neutral-700 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-lime-500 focus:border-lime-500 sm:text-sm bg-neutral-950 text-white"
                 />
               </div>
@@ -40,6 +71,8 @@ export default function Login() {
                   type="password"
                   autoComplete="current-password"
                   required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-neutral-700 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-lime-500 focus:border-lime-500 sm:text-sm bg-neutral-950 text-white"
                 />
               </div>
